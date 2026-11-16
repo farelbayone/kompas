@@ -1,0 +1,12 @@
+services:
+  web:
+    build: .
+    ports: ["8080:80"]
+    environment: { DB_HOST: db, DB_USER: root, DB_PASS: secret, DB_NAME: kompas }
+    depends_on: [db]
+  db:
+    image: mysql:8
+    environment: { MYSQL_ROOT_PASSWORD: secret }
+    volumes: ["dbdata:/var/lib/mysql"]
+volumes:
+  dbdata:
